@@ -26,21 +26,19 @@ public class GraphService {
             return optionalGraph.get();
         }
 
-        log.info("N achei n vei");
         return null;
     }
 
     // Isso aqui na vdd vai ser no update eu acho
-    public Graph saveGraph(Graph graph) {
-        log.info("{}", graph);
+    public Graph saveGraph(String animation) {
+        Graph graph = new Graph();
+
+        graph.setAnimation(animation);
         graph.setCount(0);
         graph.setUsersCount(0);
         graph.setLastUsed(LocalDateTime.now());
 
-        Graph savedGraph = graphRepo.save(graph);
-
-        log.info("Salvamos o cara, id: {}", graph.getId());
-        return savedGraph;
+        return graphRepo.save(graph);
     }
 
     public Graph updateGraph(Graph graph) {
@@ -51,6 +49,28 @@ public class GraphService {
         Graph updatedGraph = graphRepo.save(graph);
 
         return updatedGraph;
+    }
+
+    public int makeRequest(String animation) {
+        List<Graph> allGraphs = graphRepo.findAll();
+        Graph selectedGraph = null;
+
+        for (Graph graph : allGraphs) {
+            if (!animation.equals(graph.getAnimation())) {
+                continue;
+            }
+
+            graph.setCount(graph.getCount() + 1);
+            selectedGraph = graph;
+
+            graphRepo.save(selectedGraph);
+        }
+
+        if (selectedGraph == null) {
+            return -1;
+        }
+
+        return selectedGraph.getCount();
     }
 
     public void deleteGraphById(Integer id) {

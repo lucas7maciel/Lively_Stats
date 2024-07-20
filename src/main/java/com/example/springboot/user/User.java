@@ -1,4 +1,6 @@
-package com.example.springboot.graph;
+package com.example.springboot.user;
+
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,23 +12,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "graphs")
-public class Graph {
-
+@Table(name = "users")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(unique = true)
-    private String animation;
-    
-    private Integer count;
-    private Integer usersCount;
-    private LocalDateTime lastUsed;
+    private String name;
+
+    private LocalDate firstUsed;
+    private LocalDate lastUsed;
 }
