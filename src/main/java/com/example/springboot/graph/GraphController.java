@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 @RestController
 @RequestMapping("/graph/")
 @RequiredArgsConstructor
@@ -26,39 +25,40 @@ public class GraphController {
     private final GraphService graphService;
 
     @GetMapping("/")
-    public ResponseEntity<List<Graph>> getAllGraphs(){
+    public ResponseEntity<List<Graph>> getAllGraphs() {
         return ResponseEntity.ok().body(graphService.getAllGraphs());
     }
 
+    @GetMapping("/requests")
+    public Integer getGraphRequests(@RequestParam(required = true) String animation) {
+        return graphService.getGraphRequests(animation);
+    }
+    
+
     @GetMapping("/{id}")
-    public ResponseEntity<Graph> getGraphById(@PathVariable Integer id)
-    {
+    public ResponseEntity<Graph> getGraphById(@PathVariable Integer id) {
         return ResponseEntity.ok().body(graphService.getGraphById(id));
     }
 
     @PostMapping("/")
-    public ResponseEntity<Graph> saveGraph(@RequestParam(required = true) String animation)
-    {
+    public ResponseEntity<Graph> saveGraph(@RequestParam(required = true) String animation) {
         return ResponseEntity.ok().body(graphService.saveGraph(animation));
     }
 
     @PutMapping("/")
-    public ResponseEntity<Graph> updateGraph(@RequestBody Graph graph)
-    {
+    public ResponseEntity<Graph> updateGraph(@RequestBody Graph graph) {
         return ResponseEntity.ok().body(graphService.updateGraph(graph));
     }
 
     @PutMapping("/request")
-    public ResponseEntity<Integer> makeRequest(@RequestParam(required = true) String animation)
-    {
+    public ResponseEntity<Integer> makeRequest(@RequestParam(required = true) String animation) {
         return ResponseEntity.ok().body(graphService.makeRequest(animation));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteGraphById(@PathVariable Integer id)
-    {
+    public ResponseEntity<String> deleteGraphById(@PathVariable Integer id) {
         graphService.deleteGraphById(id);
         return ResponseEntity.ok().body("Deleted graph successfully");
     }
-    
+
 }

@@ -29,6 +29,14 @@ public class GraphService {
         return null;
     }
 
+    public Integer getGraphRequests(String animation) {
+        return graphRepo.getGraphRequests(animation);
+    }
+
+    public Graph getGraphByAnimation(String animation) {
+        return graphRepo.getGraphByAnimation(animation);
+    }
+
     // Isso aqui na vdd vai ser no update eu acho
     public Graph saveGraph(String animation) {
         Graph graph = new Graph();
@@ -52,19 +60,7 @@ public class GraphService {
     }
 
     public int makeRequest(String animation) {
-        List<Graph> allGraphs = graphRepo.findAll();
-        Graph selectedGraph = null;
-
-        for (Graph graph : allGraphs) {
-            if (!animation.equals(graph.getAnimation())) {
-                continue;
-            }
-
-            graph.setCount(graph.getCount() + 1);
-            selectedGraph = graph;
-
-            graphRepo.save(selectedGraph);
-        }
+        Graph selectedGraph = graphRepo.getGraphByAnimation(animation);
 
         if (selectedGraph == null) {
             return -1;

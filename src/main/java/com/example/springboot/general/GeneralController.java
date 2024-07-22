@@ -15,9 +15,7 @@ public class GeneralController {
 
     @GetMapping("/")
     public String getMethodName() {
-        return "Testando";
-        // this.requestHandlerMapping.getHandlerMethods()
-        // .forEach((key, value) -> ));
+        return "Welcome to Lively Stats!";
     }
 
 }
