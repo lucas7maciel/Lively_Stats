@@ -28,12 +28,12 @@ public class RequestController {
 
     @GetMapping("/")
     public ResponseEntity<List<Request>> getAllRequests() {
-        return ResponseEntity.ok().body(requestService.getAllRequests());
+        return ResponseEntity.ok().body(requestService.getAll());
     }
 
     @GetMapping("/name")
-    public ResponseEntity<Request> getByNameAndAnimation(@RequestParam(required = true) String username,
+    public ResponseEntity<Request> getByInfo(@RequestParam(required = true) String username,
             @RequestParam(required = true) String animation) {
-        return ResponseEntity.ok().body(requestService.getRequestByNameAndAnimation(username, animation));
+        return ResponseEntity.ok().body(requestService.getByInfo(username, animation));
     }
 }

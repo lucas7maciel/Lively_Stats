@@ -25,6 +25,10 @@ public class User {
     @Column(unique = true)
     private String name;
 
-    private LocalDate firstUsed;
-    private LocalDate lastUsed;
+    private LocalDate firstUsed = LocalDate.now();
+    private LocalDate lastUsed = LocalDate.now();
+
+    public User(String name) {
+        this.name = name;
+    }
 }

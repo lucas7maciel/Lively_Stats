@@ -25,39 +25,39 @@ public class GraphController {
     private final GraphService graphService;
 
     @GetMapping("/")
-    public ResponseEntity<List<Graph>> getAllGraphs() {
-        return ResponseEntity.ok().body(graphService.getAllGraphs());
+    public ResponseEntity<List<Graph>> getAll() {
+        return ResponseEntity.ok().body(graphService.getAll());
     }
 
     @GetMapping("/requests")
-    public Integer getGraphRequests(@RequestParam(required = true) String animation) {
-        return graphService.getGraphRequests(animation);
+    public Integer getRequests(@RequestParam(required = true) String animation) {
+        return graphService.getRequests(animation);
     }
     
 
     @GetMapping("/{id}")
-    public ResponseEntity<Graph> getGraphById(@PathVariable Integer id) {
-        return ResponseEntity.ok().body(graphService.getGraphById(id));
+    public ResponseEntity<Graph> getById(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(graphService.getById(id));
     }
 
     @PostMapping("/")
-    public ResponseEntity<Graph> saveGraph(@RequestParam(required = true) String animation) {
-        return ResponseEntity.ok().body(graphService.saveGraph(animation));
+    public ResponseEntity<Graph> save(@RequestParam(required = true) String animation) {
+        return ResponseEntity.ok().body(graphService.save(animation));
     }
 
     @PutMapping("/")
-    public ResponseEntity<Graph> updateGraph(@RequestBody Graph graph) {
-        return ResponseEntity.ok().body(graphService.updateGraph(graph));
+    public ResponseEntity<Graph> update(@RequestBody Graph graph) {
+        return ResponseEntity.ok().body(graphService.update(graph));
     }
 
-    @PutMapping("/request")
-    public ResponseEntity<Integer> makeRequest(@RequestParam(required = true) String animation) {
-        return ResponseEntity.ok().body(graphService.makeRequest(animation));
-    }
+    // @PutMapping("/request")
+    // public ResponseEntity<Integer> makeRequest(@RequestParam(required = true) String animation) {
+    //     return ResponseEntity.ok().body(graphService.makeRequest(animation));
+    // }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteGraphById(@PathVariable Integer id) {
-        graphService.deleteGraphById(id);
+    public ResponseEntity<String> deleteById(@PathVariable Integer id) {
+        graphService.deleteById(id);
         return ResponseEntity.ok().body("Deleted graph successfully");
     }
 

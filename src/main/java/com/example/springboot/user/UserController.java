@@ -24,12 +24,12 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/")
-    public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok().body(userService.getAllUsers());
+    public ResponseEntity<List<User>> getAll() {
+        return ResponseEntity.ok().body(userService.getAll());
     }
 
     @PostMapping("/")
-    public ResponseEntity<User> creatUser(@RequestParam(required = true) String name) {
-        return ResponseEntity.ok().body(userService.createUser(name));
+    public ResponseEntity<User> create(@RequestParam(required = true) String name) {
+        return ResponseEntity.ok().body(userService.create(name));
     }
 }

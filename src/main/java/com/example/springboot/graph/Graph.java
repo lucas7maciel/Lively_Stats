@@ -26,7 +26,11 @@ public class Graph {
     @Column(unique = true)
     private String animation;
     
-    private Integer count;
-    private Integer usersCount;
-    private LocalDateTime lastUsed;
+    private Integer count = 0;
+    private Integer usersCount = 0;
+    private LocalDateTime lastUsed = LocalDateTime.now();
+
+    public Graph(String animation) {
+        this.animation = animation;
+    }
 }
