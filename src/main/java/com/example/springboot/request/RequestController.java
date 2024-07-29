@@ -20,15 +20,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class RequestController {
     private final RequestService requestService;
 
-    @PostMapping("/make")
-    public ResponseEntity<Request> create(@RequestParam(required = true) String animation,
-            @RequestParam(required = true) String username) {
-        return ResponseEntity.ok().body(requestService.makeRequest(animation, username));
-    }
-
     @GetMapping("/")
     public ResponseEntity<List<Request>> getAllRequests() {
         return ResponseEntity.ok().body(requestService.getAll());
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<Request> create(@RequestParam(required = true) String animation,
+            @RequestParam(required = true) String username) {
+        return ResponseEntity.ok().body(requestService.makeRequest(animation, username));
     }
 
     @GetMapping("/name")

@@ -23,6 +23,9 @@ public class RequestService {
     private final UserService userService;
 
     public List<Request> getAll() {
+        log.info("Rodando getAll");
+        log.info("{}", requestRepo.findAll());
+
         return requestRepo.findAll();
     }
 
@@ -31,6 +34,17 @@ public class RequestService {
     }
 
     private Request createRequest(String animation, String username) {
+        Request req = requestRepo.getByInfo(username, animation);
+
+        if (req != null) {
+            log.info("Achou");
+            req.setCount(req.getCount() + 1);
+            requestRepo.save(req);
+
+            return req;
+        }
+
+        log.info("N achou");
         Graph graph = graphService.getByAnimation(animation);
 
         if (graph == null) {
@@ -41,10 +55,11 @@ public class RequestService {
         User user = userService.getByName(username);
 
         if (user == null) {
+            log.info("Criando user pq n achou");
             user = userService.create(username);
         }
 
-        Request req = new Request(graph, user);
+        req = new Request(graph, user);
 
         return requestRepo.save(req);
     }
